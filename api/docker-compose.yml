@@ -1,0 +1,19 @@
+version: '3'
+services:
+  chatroomapi:
+    build: .
+    volumes:
+      - ./:/usr/src/app
+      - ./node_modules:/usr/src/app/node_modules
+    command: yarn dev
+    ports:
+      - '3090:3090'
+    links:
+      - chatroomdb
+
+  chatroomdb:
+    image: mongo
+    ports:
+      - '27017:27017'
+    # volumes:
+    #   - ./mongo/data:/data/db

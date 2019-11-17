@@ -3,6 +3,13 @@ import styled from 'styled-components';
 import { ChatContext } from '../ChatContext';
 import { ChatMessage } from '../types';
 
+const Container = styled.div`
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  padding: 2em 3em;
+`
+
 const Title = styled.h1`
   color: palevioletred;
 `
@@ -11,22 +18,15 @@ const Row = styled.div`
   display: flex;
 `
 
-const App = () => {
+const Main = () => {
   const chatContext = useContext(ChatContext)
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState<string>('');
 
   useEffect(() => {
-    chatContext.init();
-    // retrieve observable
-    const observable = chatContext.onMessage();
-    // subscribe to observable
-    observable.subscribe((message: ChatMessage) => {
-      console.log(messages, message)
+    chatContext.onMessage().subscribe((message: ChatMessage) => {
       setMessages(oldMessages => [...oldMessages, message])
     });
-
-    return () => chatContext.disconnect();
   }, [])
 
   const onUpdateInput = (e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value);
@@ -46,8 +46,8 @@ const App = () => {
   console.log(messages)
 
   return (
-    <div>
-      <Title>Hello World!</Title>
+    <Container>
+      <Title>Current Chat</Title>
       <Row>
         <input
           placeholder="Type your message here..."
@@ -59,7 +59,7 @@ const App = () => {
         </button>
       </Row>
 
-      <div className="App-chatbox">
+      <div>
         {messages.map((msg: ChatMessage, i: number) => (
           <div key={i}>
             <p>{msg.author}</p>
@@ -69,8 +69,8 @@ const App = () => {
           </div>
         ))}
       </div>
-    </div>
+    </Container>
   );
 }
 
-export default App;
+export default Main;

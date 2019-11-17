@@ -15,6 +15,7 @@ export class SocketService {
   }
 
   public onMessage(): Observable<ChatMessage> {
+    console.log(this.socket)
     return fromEvent(this.socket, 'message');
   }
 
