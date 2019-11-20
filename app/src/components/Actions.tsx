@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import Button from '../uikit/Button';
+import { Button } from '@smooth-ui/core-sc'
+// import Button from '../uikit/Button';
 
 const Container = styled.div`
   position: fixed;

@@ -4,20 +4,7 @@ import ChatServer from '../../ChatServer';
 
 export default class Conversation {
   async getRooms(): Promise<IRoom[]> {
-    try {
-      console.log('rooms')
-      const rooms = await Room.find({}, (err, res) => {
-        console.log(err)
-      });
-      console.log('rooms 2')
-
-      return rooms;
-
-      console.log('rooms', rooms)
-    } catch (e) {
-      console.log('ba d', e)
-    }
-
+    return Room.find({});
   }
 
   async createRoom(name: string) {

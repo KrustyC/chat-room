@@ -14,7 +14,8 @@ export default function connectToDb(config: any) {
     if (!_.isNull(config('dbConfig.connectionString'))) {
       mongoose.connect(config('dbConfig.connectionString'), { useNewUrlParser: true, useUnifiedTopology: true });
     } else {
-      mongoose.connect(`mongodb://mongodb/${dbName}`, { useNewUrlParser: true });
+      console.log(dbName)
+      mongoose.connect(`mongodb://chatroomdb/${dbName}`, { useNewUrlParser: true });
     }
   } catch (e) {
     // tslint:disable-next-line
